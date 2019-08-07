@@ -22,11 +22,12 @@ public class ShowAllVertices : MonoBehaviour
 
     void Start()
     {
-        VerticeList = new List<Vector3>(GetComponent<MeshCollider>().sharedMesh.vertices); //get vertice points from the mesh of the object
+        VerticeList = new List<Vector3>(GetComponent<MeshFilter>().sharedMesh.vertices); //get vertice points from the mesh of the object
         foreach (Vector3 point in VerticeList) //all the points are added to be shown on the editor
         {
             VerticeListToShow.Add(transform.TransformPoint(point)); 
         }
+        Debug.Log(name + " has " + VerticeListToShow.Count + " vertices on it.");
     }
 
 }
