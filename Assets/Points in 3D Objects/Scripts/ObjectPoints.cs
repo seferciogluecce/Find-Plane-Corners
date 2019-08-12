@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObjectPoints : MonoBehaviour
 {
-    protected List<Vector3> ObjectVertices;
-    protected List<Vector3> ObjectUniqueVertices;
-    protected List<Vector3> ObjectLocalVertices;
+    protected List<Vector3> ObjectVertices;       //Global vertex points on the object mesh
+    protected List<Vector3> ObjectUniqueVertices; //Global distinct vertex points on the object mesh
+    protected List<Vector3> ObjectLocalVertices;  //Local vertex points on the object mesh
     protected List<Vector3> CornerPoints;
     protected List<Vector3> EdgeVectors;
     protected Vector3 RandomPoint;
@@ -22,31 +22,37 @@ public class ObjectPoints : MonoBehaviour
         Debug.Log("Hello! " + gameObject.name + " speaking. Total number of vertices:" + ObjectVertices.Count + ", Total number of distinct vertices: " + ObjectUniqueVertices.Count);
     }
 
-    public List<Vector3> GetCornerPoints()
+    public List<Vector3> GetCornerPoints() //corner points calculated and returned to outer objects
     {
         CalculateCornerPoints();
         return CornerPoints;
     }
 
-    public List<Vector3> GetObjectGlobalVertices()
+    public List<Vector3> GetObjectGlobalVertices() //global vertices calculated and returned to outer objects
     {
         CalculateObjectVertices();
         return ObjectVertices;
     }
 
-    public List<Vector3> GetObjectLocalVertices()
+    public List<Vector3> GetObjectLocalVertices()  //local vertices calculated and returned to outer objects
     {
         CalculateObjectVertices();
         return ObjectLocalVertices;
     }
 
-    public Vector3 GetRandomPoint()
+    public List<Vector3> GetObjectUniqueVertices() //unique global vertices calculated and returned to outer objects
+    {
+        CalculateObjectVertices();
+        return ObjectUniqueVertices;
+    }
+
+    public Vector3 GetRandomPoint() //random point calculated and returned to outer objects
     {
         CalculateRandomPoint();
         return RandomPoint;
     }
 
-    private void CalculateObjectVertices()
+    private void CalculateObjectVertices() //local, global and unique global vertices calculated for the object
     {
         ObjectLocalVertices.Clear();
         ObjectVertices.Clear();
@@ -59,10 +65,10 @@ public class ObjectPoints : MonoBehaviour
         ObjectUniqueVertices = ObjectVertices.Distinct().ToList();
     }
 
-    protected virtual void CalculateEdgeVectors(int VectorCornerIdx)
+    protected virtual void CalculateEdgeVectors(int VectorCornerIdx) 
     {
         CalculateCornerPoints();
-        EdgeVectors.Clear();
+        EdgeVectors.Clear(); 
         //It is up to child to fill the vectors
     }
 
@@ -73,7 +79,7 @@ public class ObjectPoints : MonoBehaviour
         //It is up to child to fill the vectors
     }
 
-    protected virtual void CalculateRandomPoint(){}
+    protected virtual void CalculateRandomPoint(){} //It is up to child how to calcullate random point
 
     protected virtual void CalculateCornerPoints()
     {

@@ -20,19 +20,19 @@ public class SpherePoints : ObjectPoints
         RandomPoint = (Random.Range(0, 2) == 0) ? WholeCoverageRandomPoint() : QuickRandomPoint();
     }
 
-    private Vector3 WholeCoverageRandomPoint()
+    private Vector3 WholeCoverageRandomPoint()  //Random point chosen from any direction from the center of the sphere
     {
-        Vector3 DirectionVector = new Vector3(  Random.Range(-1.0f, 1.0f),
+        Vector3 DirectionVector = new Vector3(  Random.Range(-1.0f, 1.0f),  //random direction vector
                                                 Random.Range(-1.0f, 1.0f),
                                                 Random.Range(-1.0f, 1.0f));
         DirectionVector.Normalize();
-        float HalfRadius = GetComponent<Renderer>().bounds.extents.magnitude / 2;
-        return transform.position + DirectionVector * ( HalfRadius + SphereSize );
+        float HalfRadius = GetComponent<Renderer>().bounds.extents.magnitude / 2; 
+        return transform.position + DirectionVector * ( HalfRadius + SphereSize ); //center moved along the direction vector by radius
     }
 
-    private Vector3 QuickRandomPoint()
+    private Vector3 QuickRandomPoint() //random point chosen from the points on the sphere mesh
     {
-        return ObjectUniqueVertices[Random.Range(0, ObjectUniqueVertices.Count)];
+        return ObjectUniqueVertices[Random.Range(0, ObjectUniqueVertices.Count)]; 
     }
 
 }

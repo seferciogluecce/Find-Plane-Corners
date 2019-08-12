@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PointShower : MonoBehaviour
 {
 
-    GameObject SelectedPointSource;
-    bool ShowAllPoints = true;
-    bool ShowRandomPoints = true;
+    GameObject SelectedPointSource; //Object that the points will be shown
+
+    bool ShowAllPoints = true; 
+    bool ShowRandomPoint = true;
     Vector3 RandomPoint;
     void OnDrawGizmos()
     {
@@ -15,44 +14,39 @@ public class PointShower : MonoBehaviour
         {
             if (ShowAllPoints)
             {
-                if (SelectedPointSource.GetComponent<ObjectPoints>().GetObjectGlobalVertices().Count > 0)
+                if (SelectedPointSource.GetComponent<ObjectPoints>().GetObjectUniqueVertices().Count > 0)
                 {
-                    for (int a = 0; a < SelectedPointSource.GetComponent<ObjectPoints>().GetObjectGlobalVertices().Count/* / 4 - 2*/; a++)
+                    for (int a = 0; a < SelectedPointSource.GetComponent<ObjectPoints>().GetObjectUniqueVertices().Count; a++) //unique points on the object mesh is shown
                     {
 
                         Gizmos.color = Color.red;
-                        Gizmos.DrawSphere(SelectedPointSource.GetComponent<ObjectPoints>().GetObjectGlobalVertices()[a], 0.5f);
+                        Gizmos.DrawSphere(SelectedPointSource.GetComponent<ObjectPoints>().GetObjectUniqueVertices()[a], 0.5f);
                     }
 
                 }
             }
 
-            if (ShowRandomPoints)
+            if (ShowRandomPoint) //random point on the object is shown
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(RandomPoint, 0.75f);
-
             }
         }
     }
 
     void Update()
     {
-        //check if the left mouse has been pressed down this frame
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //the target object to show points is chosen by mouse click on it
         {
             RaycastHit hit; ;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.GetComponent<ObjectPoints>() != null )
+                if (hit.collider.gameObject.GetComponent<ObjectPoints>() != null ) //FIX everytime the selected object clicked on, new random point is calculated
                 {
-                    if(SelectedPointSource.name != hit.collider.gameObject.name)
-                    { 
                         SelectedPointSource = hit.collider.gameObject;
-                        GetRandomPoint();
-                    }
+                        GetRandomPoint();                   
                 }
             }
         }
@@ -60,7 +54,7 @@ public class PointShower : MonoBehaviour
     }
     public void ToggleShowAllPoints()
     {
-        ShowRandomPoints = !ShowRandomPoints;
+        ShowRandomPoint = !ShowRandomPoint;
     }
 
     public void ToggleShowRandomPoints()

@@ -14,7 +14,7 @@ public class CubePoints : ObjectPoints
         return Random.Range(0, FaceCount - 1);
     }
 
-    protected  override void CalculateCornerPoints()
+    protected  override void CalculateCornerPoints()   //Random point on cube calculated with faces, so faces are defined as well
     {
         base.CalculateCornerPoints();
         List<Vector3> OneFace = new List<Vector3>();
@@ -28,7 +28,7 @@ public class CubePoints : ObjectPoints
                 OneFace = new List<Vector3>();
             }          
         }
-        CornerPoints = ObjectUniqueVertices;
+        CornerPoints = ObjectUniqueVertices; 
     }
 
 
@@ -56,7 +56,5 @@ public class CubePoints : ObjectPoints
 
         RandomPoint = Faces[randomFaceIdx][randomCornerIdx] + u * EdgeVectors[0] + v * EdgeVectors[1]; 
     }
-
-
 
 }

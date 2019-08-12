@@ -28,7 +28,6 @@ public class PlanePoints : ObjectPoints
     protected override void CalculateCornerPoints()
     {
         base.CalculateCornerPoints();
-        CornerPoints.Clear(); //in case of transform changes corner points are reset
         CornerPoints.Add(ObjectVertices[0]); //corner points are added to show  on the editor
         CornerPoints.Add(ObjectVertices[10]);
         CornerPoints.Add(ObjectVertices[110]);
