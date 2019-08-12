@@ -2,11 +2,11 @@
                             //Getting all the vertices on a plane
                             //Finding a random point on a plane
                             //Sharing the values to other game objects
-//NOT TESTED
+//NOT TESTED//Use Assets\Points in 3D Objects\Scripts\PlanePoints.cs
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanePoints : MonoBehaviour
+public class PlanePointsUtility : MonoBehaviour
 {
     List<Vector3> EdgeVectors;
     List<Vector3> CornerPoints;
