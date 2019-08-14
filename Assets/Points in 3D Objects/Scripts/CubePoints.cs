@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CubePoints : ObjectPoints
 {
-
-    int FaceCount = 6;
-    int FaceVertexCount = 4;
+    readonly int FaceCount = 6;
+    readonly int FaceVertexCount = 4;
     List<List<Vector3>> Faces = new List<List<Vector3>>();
   
     private int GetRandomFaceIndex()
